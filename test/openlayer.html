@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.0.1/css/ol.css" type="text/css">
+    <style>
+        .map {
+            height: 400px;
+            width: 600px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.0.1/build/ol.js"></script>
+    <title>OpenLayers example</title>
+</head>
+<body>
+<h2>My Map</h2>
+<div id="map" class="map"></div>
+<div>test</div>
+<div id="anchor">标注</div>
+<script type="text/javascript">
+    var osmLayer = new ol.layer.Tile({
+        source: new ol.source.OSM()
+    });
+    var pointLayer = new ol.layer.Vector({
+        source: new ol.source.Vector()
+    });
+    var circleLayer = new ol.layer.Vector({
+        source: new ol.source.Vector()
+    });
+    var map = new ol.Map({
+        // controls: ol.control.defaults().extend([
+        //     new ol.control.FullScreen(),
+        //     new ol.control.MousePosition(),
+        //     new ol.control.OverviewMap(),
+        //     new ol.control.ScaleLine(),
+        //     new ol.control.ZoomSlider(),
+        //     new ol.control.ZoomToExtent()
+        // ]), //将所有控件展示出来
+        target: 'map',
+        layers: [ osmLayer,pointLayer, circleLayer],
+        view: new ol.View({
+            center: [0,0],
+            zoom: 2
+        })
+    });
+
+    // 添加点
+    var point = new ol.Feature({
+        geometry: new ol.geom.Point([0, 0])
+    });
+    point.setStyle(new ol.style.Style({
+        image: new ol.style.Circle({
+            radius: 1,
+            fill: new ol.style.Fill({
+                color: 'red'
+            }),
+            stroke: new ol.style.Stroke({
+                color: 'red',
+                size: 1
+            })
+        })
+    }));
+    pointLayer.getSource().addFeature(point);
+
+
+    // 添加圆
+    var circle = new ol.Feature({
+        geometry: new ol.geom.Point([0, 0])
+    });
+    circle.setStyle(new ol.style.Style({
+        image: new ol.style.Circle({
+            radius: 100,
+            stroke: new ol.style.Stroke({
+                color: 'blue',
+                size: 1
+            })
+        })
+    }));
+    circleLayer.getSource().addFeature(circle);
+
+
+    // 下面把上面的图标附加到地图上，需要一个ol.Overlay
+    var anchor = new ol.Overlay({
+        element: document.getElementById('anchor')
+    });
+    // 关键的一点，需要设置附加到地图上的位置
+    anchor.setPosition([104, 30]);
+    // 然后添加到map上
+    map.addOverlay(anchor);
+    // 添加绘图的交互类
+    var lineLayer = new ol.layer.Vector({
+        source: new ol.source.Vector(),
+        style: new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                color: 'red',
+                size: 1
+            })
+        })
+    })
+    map.addLayer(lineLayer);
+    var lineDraw=new ol.interaction.Draw({
+        type: 'Polygon', // 设置绘制线
+        maxPoints: 4,    // 限制不超过4个点
+        source: lineLayer.getSource()
+    })
+    map.addInteraction(lineDraw);
+    // 监听线绘制结束事件，获取坐标
+    lineDraw.on('drawend', function(event){
+        // event.feature 就是当前绘制完成的线的Feature
+        console.log(event.feature.getGeometry().getCoordinates())
+        //document.getElementById('points').innerHTML = JSON.stringify(event.feature.getGeometry().getCoordinates());
+    });
+
+</script>
+</body>
+</html>

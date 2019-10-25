@@ -1,0 +1,39 @@
+.market-features{
+     height: 2.51rem;
+    // background: rgba(0,0,0,0.10);
+    // border: 1px solid #10437C;
+    // border-radius: 8px;
+    // margin-top: .3rem;
+    // position: relative;
+    .features-content{
+        padding: .10rem .11rem 0 .11rem;
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .features-item{
+            background: url('../../../../assets/img/features-item-bg.png') no-repeat;
+            background-size: cover;
+            position: relative;
+            width: 2.47rem;
+            height: .83rem;
+            margin-bottom: .1rem;
+            border-radius: 2px;
+            .item-title{
+                font-size: .2rem;
+                color: #43E4FA;
+                padding-left: .32rem
+            }
+            .item-num{
+                text-align: right;
+                margin-right: .08rem;
+                span{
+                    font-family: LCDBQ-Italic;
+                    font-size: .34rem;
+                    color: #94FF2D;
+                }
+            }
+        }
+    }
+}
+
+

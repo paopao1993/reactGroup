@@ -1,0 +1,48 @@
+.data-content{
+    .item-content{
+        width: 100%;
+        height: .65rem;
+        padding: 0 .31rem;
+        display:flex; 
+        justify-content: space-between;
+        .col-left,.col-right{
+            display: inline-block;
+            // width: 40%;
+            // display: flex;
+            // justify-content: space-between;
+            // align-items: center
+        }
+        .col-left{
+            width: 50%;
+        }
+        .right-title{
+            width: .96rem;
+        }
+        span{
+            font-size: .18rem;
+        }
+        .item-title{
+            display: inline-block;
+        }
+        .col1-title{
+            width: 1.31rem;
+        }
+        .col3-title{
+            width: .96rem;
+        }
+        .right-num{
+            width: 1rem;
+            text-align: right;
+            display: inline-block;
+            text-align: right;
+        }
+        .col3-num{
+            width: auto;
+        }
+        .item-num{
+            font-family: LCDBQ-Italic;
+            font-size: .4rem;
+            color: #DA6E1F;
+        }
+    }
+}

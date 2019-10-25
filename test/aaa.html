@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    div{
+        height: 600px;
+    }
+</style>
+<body>
+
+<div id="nav">
+    <a id="a11" href="#a1" class="c">书籍目录</a>
+    <a id="a22" href="#a2">作品试读</a>
+    <a id="a33" href="#a3">购买须知</a>
+    <a id="a44" href="#a4">注意事项</a>
+    <a id="a55" href="#a5">用户点评</a>
+</div>
+<br /><br />
+页面结构如下：
+<div id="a1">测试</div>
+<div id="a2">测试</div>
+<div id="a3">测试</div>
+<div id="a4">测试</div>
+<div id="a5">测试</div>
+
+</body>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+
+    $(function() {
+
+        $(window).scroll(function () {
+            //为页面添加页面滚动监听事件
+            console.log(1111)
+            var wst = $(window).scrollTop() //滚动条距离顶端值
+            for (i = 1; i < 6; i++) {             //加循环
+                if ($("#a" + i).offset().top <= wst) { //判断滚动条位置
+                    $('#nav a').removeClass("c"); //清除c类
+                    $("#a" + i + i).addClass("c");	//给当前导航加c类
+                }
+            }
+
+        })
+        $('#nav a').click(function () {
+            $('#nav a').removeClass("c");
+            $(this).addClass("c");
+        });
+    })
+</script>
+</html>
